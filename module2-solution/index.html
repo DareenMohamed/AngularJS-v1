@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" ng-app="ShoppingListCheckOff">
+  <head>
+    <title>Shopping List Check Off</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <style>
+      
+      /*I have NO copyrights of the following image*/
+       body {
+        background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/demo-bg.jpg");
+        color: white;
+      }
+      .emptyMessage {
+        font-weight: bold;
+        color: red;
+        font-size: 1.2em;
+      }
+      li {
+        margin-bottom: 7px;
+        font-size: 1.2em;
+        color: white;
+      }
+      
+      li > button {
+        margin-left: 6px;
+      }
+      button > span ,li > span{
+        color: red;
+      }
+   
+    </style>
+  </head>
+<body>
+  <div class="container">
+  <h1>Shopping List Check Off</h1>
+
+  <div class="row">
+
+    <!-- To Buy List -->
+    <div class="col-md-6" ng-controller="ToBuyController as toBuy">
+     <h2>To Buy:</h2>
+     <ul>
+       <li ng-repeat="item in toBuy.toBuyList"><span>{{$index + 1}})</span> Buy {{item.quantity}} of {{item.name}}<button class="btn btn-default" ng-click="toBuy.removeItem($index)"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
+     </ul>
+     <div class="emptyMessage" ng-if="toBuy.toBuyList.length === 0">Everything is bought!</div>
+    </div>
+
+    <!-- Already Bought List -->
+    <div class="col-md-6" ng-controller="AlreadyBoughtController as bought">
+     <h2>Already Bought:</h2>
+     <ul>
+       <li ng-repeat="item in bought.boughtList"><span>{{$index + 1}})</span> Bought {{item.quantity}} of {{item.name}}</li>
+     </ul>
+     <div ng-if="bought.boughtList.length === 0" class="emptyMessage">Nothing bought yet.</div>
+    </div>
+
+  </div>
+</div>
+
+<script src="angular.min.js"></script>
+<script src="app.js"></script> 
+</body>
+</html>
